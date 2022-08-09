@@ -8,26 +8,25 @@ import SearchField from "../Components/SearchField";
 export default function Home() {
   const [allImages, setAllImages] = useState([]);
   const [OneImages, setOneImages] = useState([]);
+  const myAPI = process.env.REACT_APP_IMAGE_ROOM_API;
   useEffect(() => {
-
     fetch(
-      "https://pixabay.com/api/?key=29031262-a447cf73bce3b451272d25245&q=man&image_type=photo&pretty=true"
+      `https://pixabay.com/api/?key=${myAPI}&q=man&image_type=photo&pretty=true`
     )
       .then((res) => res.json())
       .then((data) => setAllImages(data.hits));
   }, []);
 
   const OnImage = (imageId) => {
-      if (imageId) {
-        fetch(
-          `https://pixabay.com/api/?key=29031262-a447cf73bce3b451272d25245&q=man&image_type=photo&pretty=true&id=${imageId}`
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            setOneImages(data?.hits);
-          });
-      }
-
+    if (imageId) {
+      fetch(
+        `https://pixabay.com/api/?key=${myAPI}&q=man&image_type=photo&pretty=true&id=${imageId}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setOneImages(data?.hits);
+        });
+    }
   };
   const searchImage = (event) => {
     event.preventDefault();
@@ -35,7 +34,7 @@ export default function Home() {
     console.log(queryText);
     if (queryText) {
       fetch(
-        `https://pixabay.com/api/?key=29031262-a447cf73bce3b451272d25245&q=${queryText}&image_type=photo&pretty=true`
+        `https://pixabay.com/api/?key=${myAPI}&q=${queryText}&image_type=photo&pretty=true`
       )
         .then((res) => res.json())
         .then((data) => setAllImages(data?.hits));
