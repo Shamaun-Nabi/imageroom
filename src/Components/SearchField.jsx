@@ -1,12 +1,13 @@
 import React from "react";
 
-export default function SearchField() {
+export default function SearchField({ searchImage }) {
   return (
     <>
       <div>
-        <form action="" className="flex gap-3">
+        <form action="" className="flex gap-3" onSubmit={searchImage}>
           <input
             type="text"
+            name="query"
             className="form-control block md:w-[600px] w-full px-3 py-1.5 text-base font-normal text-gray-700bg-white bg-clip-padding  border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
             placeholder="Search Images"
           />
